@@ -15,6 +15,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/db_staycation', {
   useFindAndModify: false,
 });
 
+// menambahkan komentar
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 // router admin
