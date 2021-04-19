@@ -626,7 +626,7 @@ module.exports = {
       booking.payments.status = 'Accept';
       await booking.save();
       req.flash('alertMessage', 'Success Confirmation Pembayaran');
-      req.flash('alertStatus', 'success');
+      req.flash('alertStatus', 'primary');
       res.redirect(`/admin/booking/${id}`);
     } catch (error) {
       res.redirect(`/admin/booking/${id}`);
@@ -640,7 +640,7 @@ module.exports = {
       booking.payments.status = 'Reject';
       await booking.save();
       req.flash('alertMessage', 'Success Reject Pembayaran');
-      req.flash('alertStatus', 'success');
+      req.flash('alertStatus', 'primary');
       res.redirect(`/admin/booking/${id}`);
     } catch (error) {
       res.redirect(`/admin/booking/${id}`);

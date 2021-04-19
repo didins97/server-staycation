@@ -9,7 +9,7 @@
         <img src="http://localhost:3003/<%= booking.payments.proofPayment %>" alt="image"
           style="width: 100%; display: block;">
 
-        <div class="row ml-1">
+        <div class="row ml-1 mt-2">
           <% if(booking.payments.status == 'Proses') {%>
 
           <form action="/admin/booking/<%= booking.id %>/confirmation?_method=PUT" method="POST">
@@ -24,6 +24,14 @@
               Reject
             </button>
           </form>
+          <% } else if (booking.payments.status == 'Accept') { %>
+              <div class="alert alert-success ml-5" role="alert">
+                Permintaan Di Terima
+              </div>
+          <% } else { %>
+               <div class="alert alert-danger ml-5" role="alert">
+                Permintaan Di Tolak
+              </div>
           <% } %>
         </div>
       </div>
