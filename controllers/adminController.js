@@ -47,10 +47,10 @@ module.exports = {
 
   actionSignin: async (req, res) => {
     try {
-      const { username, password } = req.body;
-      const user = await Users.findOne({ username: username });
+      const { email, password } = req.body;
+      const user = await Users.findOne({ email: email });
       if (!user) {
-        req.flash('alertMessage', 'User yang anda masukan tidak ada!!');
+        req.flash('alertMessage', 'Email yang anda masukan tidak ada!!');
         req.flash('alertStatus', 'danger');
         res.redirect('/admin/signin');
       }
@@ -62,7 +62,7 @@ module.exports = {
       }
       req.session.user = {
         id: user.id,
-        username: user.username
+        email: user.email
       }
       res.redirect('/admin/dashboard');
     } catch (error) {

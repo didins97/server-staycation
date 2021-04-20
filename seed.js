@@ -519,8 +519,10 @@ var data = [
     'documents': [
       {
         _id: mongoose.Types.ObjectId('5e96cbe292b97300fc903345'),
-        username: 'admin',
+        email: 'admin@gmail.com',
         password: 'rahasia',
+        firstName: 'didin',
+        lastName: 'sibua'
       },
     ]
   }
