@@ -23,7 +23,7 @@ module.exports = {
         title: "Staycation | Register"
       });
     } catch (error) {
-  
+      res.redirect('/admin/signup');
     }
   },
 
