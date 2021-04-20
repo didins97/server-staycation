@@ -12,6 +12,21 @@ const path = require('path');
 const bcrypt = require('bcryptjs')
 
 module.exports = {
+  
+  viewSignUp: async (req, res) => {  
+    try { 
+      const alertMessage = req.flash('alertMessage');
+      const alertStatus = req.flash('alertStatus');
+      const alert = { message: alertMessage, status: alertStatus };
+      res.render('register', {
+        alert,
+        title: "Staycation | Register"
+      });
+    } catch (error) {
+  
+    }
+  },
+
   viewSignin: async (req, res) => {
     try {
       const alertMessage = req.flash('alertMessage');
