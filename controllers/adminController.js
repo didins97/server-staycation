@@ -1,42 +1,59 @@
-const Category = require('../models/Category');
-const Bank = require('../models/Bank');
-const Item = require('../models/Item');
-const Image = require('../models/Image');
-const Feature = require('../models/Feature');
-const Activity = require('../models/Activity');
-const Booking = require('../models/Booking');
-const Member = require('../models/Member');
-const Users = require('../models/Users');
-const fs = require('fs-extra');
-const path = require('path');
-const bcrypt = require('bcryptjs')
+const Category  = require('../models/Category');
+const Bank      = require('../models/Bank');
+const Item      = require('../models/Item');
+const Image     = require('../models/Image');
+const Feature   = require('../models/Feature');
+const Activity  = require('../models/Activity');
+const Booking   = require('../models/Booking');
+const Member    = require('../models/Member');
+const Users     = require('../models/Users');
+const fs        = require('fs-extra');
+const path      = require('path');
+const bcrypt    = require('bcryptjs')
 
 module.exports = {
   
-  viewSignUp: async (req, res) => {  
+   viewSignUp: async (req, res) => {  
     try { 
       const alertMessage = req.flash('alertMessage');
       const alertStatus = req.flash('alertStatus');
       const alert = { message: alertMessage, status: alertStatus };
-      res.render('register', {
-        alert,
-        title: "Staycation | Register"
-      });
+      res.render('register', { alert, title: "Staycation | Register" });
     } catch (error) {
       res.redirect('/admin/signup');
     }
   },
 
+  actionSignUp: async (req, res) => {
+    try {
+      const { email, password, confirPassword } = req.body;
+      const user = await Users.findOne({email: email});
+      if (!user){ 
+        if (confirPassword !== password){  
+          req.flash('alertMessage', 'periksa password kembali');
+          req.flash('alertStatus', 'danger');
+          res.redirect('/admin/signup');
+        } else {
+          await Users.create({ email, password });
+          res.redirect('/admin/signin');
+        } 
+      } else {
+        req.flash('alertMessage', 'Silakan Cari Email Lain');
+        req.flash('alertStatus', 'danger');
+        res.redirect('/admin/signup');
+      }
+    } catch (error) {
+      res.redirect('/admin/signup');
+    }
+  },
+  
   viewSignin: async (req, res) => {
     try {
       const alertMessage = req.flash('alertMessage');
       const alertStatus = req.flash('alertStatus');
       const alert = { message: alertMessage, status: alertStatus };
       if (req.session.user == null || req.session.user == undefined) {
-        res.render('index', {
-          alert,
-          title: "Staycation | Login"
-        });
+        res.render('index', { alert, title: "Staycation | Login" });
       } else {
         res.redirect('/admin/dashboard');
       }
@@ -60,16 +77,13 @@ module.exports = {
         req.flash('alertStatus', 'danger');
         res.redirect('/admin/signin');
       }
-      req.session.user = {
-        id: user.id,
-        email: user.email
-      }
+      req.session.user = { id: user.id, email: user.email }
       res.redirect('/admin/dashboard');
     } catch (error) {
       res.redirect('/admin/signin');
     }
   },
-
+  
   actionLogout: (req, res) => {
     req.session.destroy();
     res.redirect('/admin/signin');

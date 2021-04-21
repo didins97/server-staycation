@@ -1,11 +1,12 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const methodOverride = require('method-override');
-const session = require('express-session');
-const flash = require('connect-flash');
+var createError       = require('http-errors');
+var express           = require('express');
+var path              = require('path');
+var cookieParser      = require('cookie-parser');
+var logger            = require('morgan');
+const methodOverride  = require('method-override');
+const session         = require('express-session');
+const flash           = require('connect-flash');
+
 // import mongoose
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/db_staycation', {
@@ -15,9 +16,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/db_staycation', {
   useFindAndModify: false,
 });
 
+// Router
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-// router admin
 const adminRouter = require('./routes/admin');
 
 var app = express();
@@ -42,8 +43,8 @@ app.use('/sb-admin-2', express.static(path.join(__dirname, 'node_modules/startbo
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// admin
 app.use('/admin', adminRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

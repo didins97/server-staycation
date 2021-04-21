@@ -4,6 +4,7 @@ const { uploadSingle, uploadMultiple } = require('../middlewares/multer');
 const auth = require('../middlewares/auth');
 
 router.get('/signup', adminController.viewSignUp);
+router.post('/signup', adminController.actionSignUp);
 router.get('/signin', adminController.viewSignin);
 router.post('/signin', adminController.actionSignin);
 router.use(auth);

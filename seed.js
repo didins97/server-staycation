@@ -521,15 +521,6 @@ var data = [
         _id: mongoose.Types.ObjectId('5e96cbe292b97300fc903345'),
         email: 'admin@gmail.com',
         password: 'rahasia',
-        firstName: 'didin',
-        lastName: 'sibua'
-      },
-      {
-        _id: mongoose.Types.ObjectId('5e96cbe292b97300fc903346'),
-        email: 'didin@gmail.com',
-        password: 'password',
-        firstName: 'hafid',
-        lastName: 'sibua'
       },
     ]
   }
