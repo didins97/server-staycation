@@ -20,6 +20,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/db_staycation', {
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const adminRouter = require('./routes/admin');
+const apiRouter = require('./routes/api');
 
 var app = express();
 
@@ -44,6 +45,7 @@ app.use('/sb-admin-2', express.static(path.join(__dirname, 'node_modules/startbo
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
+app.use('/api/v1', apiRouter);
 
 
 // catch 404 and forward to error handler
